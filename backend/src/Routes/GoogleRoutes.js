@@ -12,7 +12,7 @@ router.get("/callback",
     ((req, res) => {
         if (req.user) {
             res.cookie('token', createtoken(req.user.email, req.user._id))
-            return res.redirect(process.env.CLIENT_URL);
+            return res.redirect("https://mern-production-c2fc.up.railway.app/");
         }
     })
 );
