@@ -9,7 +9,7 @@ passport.use("google",
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: "/google/callback",
+            callbackURL: process.env.CALLBACKURL,
         },
         async (accessToken, refreshToken, profile, done) => {
             const user = await User.findOne({
