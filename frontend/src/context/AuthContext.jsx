@@ -48,6 +48,13 @@ export const AuthContextProvider = ({ children }) => {
         }
       }, []);
 
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('token');
+        localStorage.setItem("token",token);
+        setToken(token);
+    }, []);
+
     const connectedUser = useCallback(async () =>{
         const verify = async () =>{
             const response = await getRequest(`${baseUrl}local/protected`, token);

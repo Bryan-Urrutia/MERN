@@ -11,8 +11,8 @@ router.get("/callback",
         { scope: ['profile', 'email'], session: false }),
     ((req, res) => {
         if (req.user) {
-            res.cookie('token', createtoken(req.user.email, req.user._id))
-            return res.redirect("https://mern-production-c2fc.up.railway.app/");
+            const token = createtoken(req.user.email, req.user._id)
+            return res.redirect(`${process.env.CLIENT_URL}?token=${token}`);
         }
     })
 );
