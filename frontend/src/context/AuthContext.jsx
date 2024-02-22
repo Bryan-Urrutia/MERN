@@ -53,6 +53,7 @@ export const AuthContextProvider = ({ children }) => {
         const token = params.get('token');
         localStorage.setItem("token",token);
         setToken(token);
+        router.push("/protected")
     }, []);
 
     const connectedUser = useCallback(async () =>{
