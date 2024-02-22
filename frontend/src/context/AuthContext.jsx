@@ -27,6 +27,27 @@ export const AuthContextProvider = ({ children }) => {
         }
     }, []);
 
+
+    useEffect(() => {
+        // Función para obtener el token de las cookies
+        const getTokenFromCookie = () => {
+          const cookies = document.cookie.split(';');
+          for (let cookie of cookies) {
+            const [name, value] = cookie.trim().split('=');
+            if (name === 'token') {
+              return value.replace(/%20/g, ' ');
+            }
+          }
+          return '';
+        };
+
+        const token = getTokenFromCookie();
+        if (token) {
+            setToken(token);
+            router.push("/protected ")
+        }
+      }, []);
+
     const connectedUser = useCallback(async () =>{
         const verify = async () =>{
             const response = await getRequest(`${baseUrl}local/protected`, token);
